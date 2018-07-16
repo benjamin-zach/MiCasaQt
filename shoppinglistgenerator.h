@@ -1,8 +1,11 @@
 #ifndef SHOPPINGLISTGENERATOR_H
 #define SHOPPINGLISTGENERATOR_H
 
-#include "xmlparser.h"
 #include "datatypes.h"
+#include <QList>
+#include <QMap>
+#include <QString>
+#include <QStringList>
 
 class CategoryShoppingList : public QList<Ingredient>
 {
@@ -26,16 +29,11 @@ public:
 class ShoppingListGenerator
 {
 public:
-    ShoppingListGenerator();
-    ShoppingListGenerator(QWeakPointer<XMLParser> InParserRef);
-
     ShoppingList GetShoppingList(const QStringList& InRecepyList);
 
 private:
 
     void FillShoppingList(const QList<Ingredient>& InIngredientsList, ShoppingList& OutShoppingList);
-
-    QWeakPointer<XMLParser> ParserRef;
 };
 
 #endif // SHOPPINGLISTGENERATOR_H

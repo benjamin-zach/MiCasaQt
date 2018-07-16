@@ -48,15 +48,14 @@ QString XMLParser::GetIngredientCategory(const QString &IngredientName)
 
 void XMLParser::AddRecepyIngredients(const QString &InRecepyName, QList<Ingredient> &OutIngredients)
 {
-    IterateCatalogue([&](Recepy& CurrentRecepy)
+    for(const Recepy& Rec : Catalogue)
     {
-        if(CurrentRecepy.Name == InRecepyName)
+        if(QString::compare(InRecepyName, Rec.Name, Qt::CaseInsensitive))
         {
-            OutIngredients.append(CurrentRecepy.Ingredients);
-            return true;
+            OutIngredients.append(Rec.Ingredients);
+            return;
         }
-        return false;
-    });
+    }
     qDebug() << "Could not find recepy name " << InRecepyName << " in catalogue";
 }
 
@@ -121,7 +120,6 @@ void XMLParser::ParseSourceFile(QString FilePath)
             {
                 if(Xml.name() == "Recepy")
                 {
-                    qDebug() << "Found a recepy";
                     ParseRecepy(Xml);
                 }
             }
@@ -152,7 +150,6 @@ void XMLParser::ParseIngredientsFile(QString FilePath)
                 {
                     QString Name = Xml.attributes().value("Name").toString();
                     QString Category = Xml.attributes().value("Category").toString();
-                    qDebug() << Name << " " << Category;
                     IngredientCategories.insert(Name, Category);
                 }
             }
@@ -189,7 +186,6 @@ void XMLParser::ParseIngredient(QXmlStreamReader &Xml, Recepy& ParentRecepy)
         Ing.Quantity = Xml.attributes().value("Quantity").toFloat();
         Ing.Unit = EUnity::None; // TODO: parse unit #zach
 
-        qDebug() << "Found ingredient: " << Ing.Name << " " << QString::number(Ing.Quantity);
         ParentRecepy.Ingredients.append(Ing);
     }
 

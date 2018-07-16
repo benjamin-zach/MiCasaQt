@@ -1,22 +1,29 @@
 #include "datatypes.h"
 
 
+void Ingredient::ConvertToBaseUnit()
+{
+        float Factor;
+        Unit = GetBaseType(Unit, Factor);
+        Quantity *= Factor;
+}
+
 EUnity Ingredient::GetBaseType(const EUnity Unit, float &Factor)
 {
     Factor = 1.f;
     switch(Unit)
     {
-    case kg:
+    case EUnity::kg:
         Factor = 1000.f;
-    case g:
-        return g;
-    case l:
+    case EUnity::g:
+        return EUnity::g;
+    case EUnity::l:
         Factor = 1000.f;
-        return ml;
-    case cl:
+        return EUnity::ml;
+    case EUnity::cl:
         Factor = 10.f;
-    case ml:
-        return ml;
+    case EUnity::ml:
+        return EUnity::ml;
     }
     return Unit;
 }

@@ -1,24 +1,17 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include "statics.h"
 #include "calendaritem.h"
+#include "logger.h"
 
 #include <QLabel>
 #include <QComboBox>
 
-MainWindow::MainWindow(QWeakPointer<XMLParser> Parser, QWeakPointer<ShoppingListGenerator> Generator, QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    ParserRef(Parser),
-    GeneratorRef(Generator)
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    if(ParserRef == nullptr)
-    {
-        qDebug() << "No Parser";
-        //ParserRef = new XMLParser();
-    }
 }
 
 MainWindow::~MainWindow()
@@ -41,7 +34,7 @@ void MainWindow::AddCalendarItem()
     ui->listWidget->addItem (listWidgetItem);
 
     //Creating an object of the designed widget which is to be added to the listwidget
-    CalendarItem* Item = new CalendarItem(ParserRef);
+    CalendarItem* Item = new CalendarItem();
     QLabel* Label = Item->findChild<QLabel*>("label");
     uint ElementNumber = ui->listWidget->count();
     QString DateText = CalendarItem::GetDate(ElementNumber);
@@ -59,6 +52,8 @@ void MainWindow::GenerateShoppingList()
 {
     QStringList Recepies;
     GetSelectedRecepies(Recepies);
+    ShoppingList sl = Statics::Instance().generator()->GetShoppingList(Recepies);
+    MiCasaLogger::toString(sl);
 }
 
 void MainWindow::GetSelectedRecepies(QStringList& Result)

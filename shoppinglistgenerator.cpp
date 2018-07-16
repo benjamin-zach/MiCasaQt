@@ -1,30 +1,23 @@
 #include "shoppinglistgenerator.h"
-
-ShoppingListGenerator::ShoppingListGenerator() :
-    ShoppingListGenerator(nullptr)
-{
-
-}
-
-ShoppingListGenerator::ShoppingListGenerator(QWeakPointer<XMLParser> InParserRef) :
-    ParserRef(InParserRef)
-{
-}
+#include "statics.h"
 
 ShoppingList ShoppingListGenerator::GetShoppingList(const QStringList& InRecepyList)
 {
     QList<Ingredient> AllIngredients;
     for(const QString& RecepyName : InRecepyList)
     {
-        XMLParser.AddRecepyIngredients(RecepyName, AllIngredients);
+        Statics::parser().data()->AddRecepyIngredients(RecepyName, AllIngredients);
     }
+    ShoppingList OutShoppingList;
+    FillShoppingList(AllIngredients, OutShoppingList);
+    return OutShoppingList;
 }
 
 void ShoppingListGenerator::FillShoppingList(const QList<Ingredient> &InIngredientsList, ShoppingList &OutShoppingList)
 {
     for(const Ingredient& Ing : InIngredientsList)
     {
-        QString Category = XMLParser.GetIngredientCategory(Ing.Name);
+        QString Category = Statics::parser().data()->GetIngredientCategory(Ing.Name);
         CategoryShoppingList csl = OutShoppingList.FindOrAdd(Category);
         csl.append(Ing);
     }
@@ -60,7 +53,8 @@ CategoryShoppingList& ShoppingList::FindOrAdd(const QString &InCategoryName)
 
 void CategoryShoppingList::Sort()
 {
-    qSort(begin(), end(), Ingredient::operator<);
+    qSort(*this);
+    //qSort(begin(), end(), Ingredient::LessThan);
     IsSorted = true;
 }
 
@@ -72,11 +66,11 @@ void CategoryShoppingList::Merge()
     }
     for(int i = 0; i < size() - 1; ++i)
     {
-        Ingredient& Ing = List[i];
+        Ingredient& Ing = (*this)[i];
         Ing.ConvertToBaseUnit();
-        for(int j = i+1; j < size() && (*this[j]).Name == Ing.Name; ++j)
+        for(int j = i+1; j < size() && (*this)[j].Name == Ing.Name; ++j)
         {
-            if((*this)[j].Unit && Ing.Unit)
+            if((*this)[j].Unit == Ing.Unit)
             {
                 Ing.Quantity += (*this)[j].Quantity;
                 removeAt(j);

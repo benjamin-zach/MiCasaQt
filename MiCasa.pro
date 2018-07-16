@@ -32,7 +32,8 @@ SOURCES += \
     mainwindow.cpp \
     xmlparser.cpp \
     shoppinglistgenerator.cpp \
-    datatypes.cpp
+    datatypes.cpp \
+    statics.cpp
 
 HEADERS += \
         mainwindow.h \

@@ -1,17 +1,17 @@
 #include "calendaritem.h"
 #include "ui_calendaritem.h"
+#include "statics.h"
 #include <QComboBox>
 #include <chrono>
 #include <ctime>
 
-CalendarItem::CalendarItem(QWeakPointer<XMLParser> Parser, QWidget *parent) :
-    ParserRef(Parser),
+CalendarItem::CalendarItem(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CalendarItem)
 {
     ui->setupUi(this);
     QStringList RecepiesNames;
-    ParserRef.data()->GetRecepiesNames(RecepiesNames);
+    Statics::parser().data()->GetRecepiesNames(RecepiesNames);
     for(auto DropDown : this->findChildren<QComboBox*>())
     {
         DropDown->addItems(RecepiesNames);

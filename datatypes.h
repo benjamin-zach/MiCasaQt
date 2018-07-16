@@ -1,6 +1,9 @@
 #ifndef DATATYPES_H
 #define DATATYPES_H
 
+#include <QList>
+#include <QString>
+
 enum class EUnity
 {
     None,
@@ -19,11 +22,11 @@ struct Ingredient
     float Quantity;
     EUnity Unit;
 
-    void ConvertToBaseUnit()
+    void ConvertToBaseUnit();
+
+    static friend bool LessThan(const Ingredient& Ing1, const Ingredient& Ing2)
     {
-        float Factor;
-        Unit = GetBaseType(Unit, Factor);
-        Quantity *= Factor;
+        return Ing1.Name < Ing2.Name;
     }
 
     friend bool operator<(const Ingredient& Ing1, const Ingredient& Ing2)

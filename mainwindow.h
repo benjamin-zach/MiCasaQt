@@ -1,8 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "xmlparser.h"
-#include "shoppinglistgenerator.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -14,7 +12,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWeakPointer<XMLParser> Parser, QWeakPointer<ShoppingListGenerator> Generator, QWidget *parent = 0);
+    MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
 private slots:
@@ -29,9 +27,6 @@ private:
     void GetSelectedRecepies(QStringList& Result);
 
     Ui::MainWindow *ui;
-
-    QWeakPointer<XMLParser> ParserRef;
-    QWeakPointer<ShoppingListGenerator> GeneratorRef;
 };
 
 #endif // MAINWINDOW_H
