@@ -1,5 +1,6 @@
 #include "shoppinglistgenerator.h"
 #include "statics.h"
+#include "logger.h"
 
 ShoppingList ShoppingListGenerator::GetShoppingList(const QStringList& InRecepyList)
 {
@@ -18,7 +19,8 @@ void ShoppingListGenerator::FillShoppingList(const QList<Ingredient> &InIngredie
     for(const Ingredient& Ing : InIngredientsList)
     {
         QString Category = Statics::parser().data()->GetIngredientCategory(Ing.Name);
-        CategoryShoppingList csl = OutShoppingList.FindOrAdd(Category);
+        CategoryShoppingList& csl = OutShoppingList.FindOrAdd(Category);
+        csl.CategoryName = Category;
         csl.append(Ing);
     }
     for(CategoryShoppingList& csl : OutShoppingList)

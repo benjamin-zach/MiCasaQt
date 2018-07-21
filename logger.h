@@ -42,6 +42,15 @@ public:
         }
     }
 
+    static void toString(const QList<Ingredient>& IngredientList)
+    {
+        qDebug() << "Printing ingredient list of " << IngredientList.size() << " recepies:";
+        for(const auto& Ing : IngredientList)
+        {
+            toString(Ing);
+        }
+    }
+
     static void toString(const ShoppingList& InShoppingList)
     {
         qDebug() << "Printing shopping list of " << InShoppingList.TotalSize() << " elements:";

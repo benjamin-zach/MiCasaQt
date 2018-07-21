@@ -10,13 +10,13 @@
 class CategoryShoppingList : public QList<Ingredient>
 {
 public:
+    QString CategoryName;
     const QString& GetCategoryName() const { return CategoryName; }
     void Sort();
     void Merge();
 
 private:
     bool IsSorted = false;
-    QString CategoryName;
 };
 
 class ShoppingList : public QMap<QString, CategoryShoppingList>

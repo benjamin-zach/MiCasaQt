@@ -15,9 +15,6 @@ XMLParser::XMLParser(QString CatalogueFilePath, QString IngredientsFilePath)
     ParseSourceFile(CatalogueFilePath);
     //MiCasaLogger::toString(Catalogue);
     ParseIngredientsFile(IngredientsFilePath);
-
-    GetIngredientCategory("Farina");
-    GetIngredientCategory("Domi");
 }
 
 void XMLParser::GetRecepiesNames(QVector<QString>& InOutRecepyNames)
@@ -172,7 +169,7 @@ void XMLParser::ParseRecepy(QXmlStreamReader &Xml)
         }
         Xml.readNext();
     }
-    qDebug() << Rec.Name;
+    //qDebug() << Rec.Name;
     Catalogue.append(Rec);
 }
 

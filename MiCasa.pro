@@ -33,7 +33,8 @@ SOURCES += \
     xmlparser.cpp \
     shoppinglistgenerator.cpp \
     datatypes.cpp \
-    statics.cpp
+    statics.cpp \
+    addrecepydialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,8 +45,10 @@ HEADERS += \
     logger.h \
     datatypes.h \
     shoppinglistgenerator.h \
-    statics.h
+    statics.h \
+    addrecepydialog.h
 
 FORMS += \
         mainwindow.ui \
-    calendaritem.ui
+    calendaritem.ui \
+    addrecepydialog.ui
