@@ -12,9 +12,8 @@ XMLParser::XMLParser()
 
 XMLParser::XMLParser(QString CatalogueFilePath, QString IngredientsFilePath)
 {
-    ParseSourceFile(CatalogueFilePath);
-    //MiCasaLogger::toString(Catalogue);
-    ParseIngredientsFile(IngredientsFilePath);
+    UpdateCatalogue(CatalogueFilePath);
+    UpdateIngredients(IngredientsFilePath);
 }
 
 void XMLParser::GetRecepiesNames(QVector<QString>& InOutRecepyNames)
@@ -54,6 +53,16 @@ void XMLParser::AddRecepyIngredients(const QString &InRecepyName, QList<Ingredie
         }
     }
     qDebug() << "Could not find recepy name " << InRecepyName << " in catalogue";
+}
+
+void XMLParser::UpdateCatalogue(const QString &NewCatalogueFilePath)
+{
+    ParseSourceFile(NewCatalogueFilePath);
+}
+
+void XMLParser::UpdateIngredients(const QString &NewIngredientsFilePath)
+{
+    ParseIngredientsFile(NewIngredientsFilePath);
 }
 
 QStringList XMLParser::GetElementsValues(QDomElement Root, const QString &Key)

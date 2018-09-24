@@ -12,12 +12,15 @@ class XMLParser
 {
 public:
     XMLParser();
-    XMLParser(QString CatalogueFilePath, QString IngridientsFilePath);
+    XMLParser(QString CatalogueFilePath, QString IngredientsFilePath);
 
     void GetRecepiesNames(QVector<QString>& InOutRecepyNames);
     void GetRecepiesNames(QStringList& InOutRecepyNames);
     QString GetIngredientCategory(const QString& IngredientName);
     void AddRecepyIngredients(const QString& InRecepyName, QList<Ingredient>& OutIngredients);
+
+    void UpdateCatalogue(const QString& NewCatalogueFilePath);
+    void UpdateIngredients(const QString& NewIngredientsFilePath);
 
 private:
 

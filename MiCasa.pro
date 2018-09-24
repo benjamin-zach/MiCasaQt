@@ -34,7 +34,8 @@ SOURCES += \
     shoppinglistgenerator.cpp \
     datatypes.cpp \
     statics.cpp \
-    addrecepydialog.cpp
+    addrecepydialog.cpp \
+    filechooser.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -46,9 +47,14 @@ HEADERS += \
     datatypes.h \
     shoppinglistgenerator.h \
     statics.h \
-    addrecepydialog.h
+    addrecepydialog.h \
+    filechooser.h
 
 FORMS += \
         mainwindow.ui \
     calendaritem.ui \
-    addrecepydialog.ui
+    addrecepydialog.ui \
+    filechooser.ui
+
+DISTFILES += \
+    config.ini
