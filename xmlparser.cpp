@@ -65,7 +65,7 @@ void XMLParser::UpdateIngredients(const QString &NewIngredientsFilePath)
     ParseIngredientsFile(NewIngredientsFilePath);
 }
 
-QStringList XMLParser::GetElementsValues(QDomElement Root, const QString &Key)
+/*QStringList XMLParser::GetElementsValues(QDomElement Root, const QString &Key)
 {
     QStringList Result;
     IterateOverElements(Root, [&](const QDomNode& CurrentNode){
@@ -77,9 +77,9 @@ QStringList XMLParser::GetElementsValues(QDomElement Root, const QString &Key)
          return false;
     });
     return Result;
-}
+}*/
 
-QVector<QDomElement> XMLParser::GetElementsByPredicate(QDomElement& Root, const std::function<bool (const QDomNode &)>& Predicate)
+/*QVector<QDomElement> XMLParser::GetElementsByPredicate(QDomElement& Root, const std::function<bool (const QDomNode &)>& Predicate)
 {
     QDomNodeList Nodes = Root.childNodes();
     QVector<QDomElement> ResultNodes;
@@ -91,16 +91,16 @@ QVector<QDomElement> XMLParser::GetElementsByPredicate(QDomElement& Root, const 
         return true;
     });
     return ResultNodes;
-}
+}*/
 
-void XMLParser::IterateOverElements(QDomElement& Root, const std::function<bool (QDomNode &)>& Func)
+/*void XMLParser::IterateOverElements(QDomElement& Root, const std::function<bool (QDomNode &)>& Func)
 {
     QDomNodeList Nodes = Root.childNodes();
     for(auto i = 0; i < Nodes.size(); ++i)
     {
         Func(Nodes.at(i));
     }
-}
+}*/
 
 void XMLParser::IterateCatalogue(const std::function<bool(Recepy&)> &Func)
 {

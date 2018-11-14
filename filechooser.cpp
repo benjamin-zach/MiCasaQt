@@ -36,4 +36,5 @@ void FileChooser::on_buttonBox_rejected()
 bool FileChooser::GetChoosenFilePath(QString &OutFilePath)
 {
     OutFilePath = ""; //  TODO: #zach
+    return false;
 }

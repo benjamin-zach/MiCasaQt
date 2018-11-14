@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "shoppinglistgenerator.h"
 #include "statics.h"
 #include "logger.h"
@@ -55,7 +56,7 @@ CategoryShoppingList& ShoppingList::FindOrAdd(const QString &InCategoryName)
 
 void CategoryShoppingList::Sort()
 {
-    qSort(*this);
+    std::sort(begin(), end(), Ingredient::LessThan);
     //qSort(begin(), end(), Ingredient::LessThan);
     IsSorted = true;
 }

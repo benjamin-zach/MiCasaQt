@@ -24,7 +24,7 @@ struct Ingredient
 
     void ConvertToBaseUnit();
 
-    static friend bool LessThan(const Ingredient& Ing1, const Ingredient& Ing2)
+    static bool LessThan(const Ingredient& Ing1, const Ingredient& Ing2)
     {
         return Ing1.Name < Ing2.Name;
     }

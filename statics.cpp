@@ -4,14 +4,14 @@
 Statics::Statics()
 {
     ReadConfigFile();
-    XmlParser(BuildParser(Config[ConfigKey::CatalogueFilePath], Config[ConfigKey::IngredientsFilePath]));
-    Generator(BuildGenerator());
+    XmlParser = BuildParser(Config[ConfigKey::CatalogueFilePath], Config[ConfigKey::IngredientsFilePath]);
+    Generator = BuildGenerator();
 }
 
 void Statics::ReadConfigFile()
 {
-    QFile ConfigFile = QFile(ConfigFilePath);
-    if(!file.open(QIODevice.ReadOnly | QIODevice.Text))
+    QFile ConfigFile(ConfigFilePath);
+    if(!ConfigFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         qDebug() << "Coudl not open config file!";
         return;
@@ -62,3 +62,4 @@ Statics &Statics::Instance()
 
 Statics* Statics::SingletonObject = nullptr;
 const QString Statics::ConfigFilePath = "config.ini";
+QMap<Statics::ConfigKey, QString> Statics::Config = QMap<Statics::ConfigKey, QString>();
