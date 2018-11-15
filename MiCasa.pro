@@ -53,3 +53,6 @@ FORMS += \
 
 DISTFILES += \
     config.ini
+
+RESOURCES += \
+    resources.qrc

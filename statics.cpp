@@ -13,7 +13,7 @@ void Statics::ReadConfigFile()
     QFile ConfigFile(ConfigFilePath);
     if(!ConfigFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Coudl not open config file!";
+        qDebug() << "Could not open config file!";
         return;
     }
     QTextStream ConfigFileStream(&ConfigFile);

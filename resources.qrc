@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/Textures">
+        <file>Textures/ShoppingCart.png</file>
+    </qresource>
+</RCC>
