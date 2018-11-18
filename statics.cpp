@@ -21,10 +21,13 @@ void Statics::ReadConfigFile()
     {
         QString line = ConfigFileStream.readLine();
         line.replace(" ", "");
+        line.replace("\"", "");
+        if(line.contains("["))
+            continue;
         int SeparatorIndex = line.indexOf("=");
         QString Key = line.left(SeparatorIndex);
-        QString Value = line.right(SeparatorIndex+1);
-        qDebug() << Key << ": " << Value;
+        QString Value = line.mid(SeparatorIndex+1, -1);
+        qDebug() << SeparatorIndex << Key << ": " << Value;
         // TODO: meta #zach
         if(Key == "CatalogueFilePath")
         {
@@ -61,5 +64,5 @@ Statics &Statics::Instance()
 }
 
 Statics* Statics::SingletonObject = nullptr;
-const QString Statics::ConfigFilePath = "config.ini";
+const QString Statics::ConfigFilePath = "C:/Users/bzach/Documents/MiCasa//config.ini";
 QMap<Statics::ConfigKey, QString> Statics::Config = QMap<Statics::ConfigKey, QString>();
